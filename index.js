@@ -199,7 +199,7 @@ app.get('/pdf/test', async (req, res) => {
 
 
 // Human endpoint → sends PDF
-app.post('/pdf/human', async (req, res) => {
+app.post('/controlcenter', async (req, res) => {
     try {
         let data = req.body;
         const { outputPath } = await generatePdf(data);
@@ -223,3 +223,4 @@ app.post('/pdf/json', async (req, res) => {
 });
 
 app.listen(3001, () => console.log('PDF API running on port 3001'));
+
