@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    container_name: node_api
+    ports:
+      - "7010:3001"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
