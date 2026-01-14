@@ -9,3 +9,14 @@ services:
     environment:
       - NODE_ENV=production
     restart: unless-stopped
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pdf-api.rule=Host(`www.vatita.net`) && PathPrefix(`/pdfapi`)"
+      - "traefik.http.routers.pdf-api.entrypoints=web,websecure"
+      - "traefik.http.routers.pdf-api.tls.certresolver=letsencrypt"
+      - "traefik.http.services.pdf-api.loadbalancer.server.port=3001"
+networks:
+  web:
+    external: true

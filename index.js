@@ -163,7 +163,7 @@ function mapToPdfFields(data = {}) {
     return mapped;
 }
 
-app.get('/pdf/human', async (req, res) => {
+app.get('/pdfapi/human', async (req, res) => {
     try {
         // Use the test data directly but map it so fields match PDF names
         const mappedData = { ...testData, ...mapToPdfFields(testData) };
@@ -175,7 +175,7 @@ app.get('/pdf/human', async (req, res) => {
     }
 });
 
-app.get('/pdf/test', async (req, res) => {
+app.get('/pdfapi/test', async (req, res) => {
     try {
         const templatePath = path.join('.', 'templates', 'c1.pdf');
         const templateBytes = fs.readFileSync(templatePath);
@@ -199,7 +199,7 @@ app.get('/pdf/test', async (req, res) => {
 
 
 // Human endpoint → sends PDF
-app.post('/controlcenter', async (req, res) => {
+app.post('/pdfapi/controlcenter', async (req, res) => {
     try {
         let data = req.body;
         const { outputPath } = await generatePdf(data);
@@ -211,7 +211,7 @@ app.post('/controlcenter', async (req, res) => {
 });
 
 // Non-human endpoint → returns base64
-app.post('/pdf/json', async (req, res) => {
+app.post('/pdfapi/json', async (req, res) => {
     try {
         let data = req.body.json;
         const { pdfBytes } = await generatePdf(data);
